@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convite de 15 Anos ✨</title>
+
+  <style>
+    :root {
+      --primary: #d4af37; /* dourado */
+      --secondary: #000000; /* preto */
+      --glow: rgba(212,175,55,0.8);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* FUNDO ESTILO BALÕES + CONFETE */
+    .background {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,0.25), transparent 40%),
+        radial-gradient(circle at top right, rgba(212,175,55,0.25), transparent 40%),
+        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%);
+      z-index: -2;
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(var(--primary) 1.5px, transparent 1.5px),
+        radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 35px 35px, 60px 60px;
+      animation: fall 10s linear infinite;
+      opacity: 0.45;
+      z-index: -1;
+    }
+
+    @keyframes fall {
+      from { background-position: 0 -400px, 0 -800px; }
+      to { background-position: 0 800px, 0 1600px; }
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 3.4rem;
+      color: var(--primary);
+      text-shadow:
+        0 0 10px var(--glow),
+        0 0 30px var(--glow);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 50px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), #fff1a8);
+      color: #000;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow:
+        0 0 20px var(--glow),
+        0 0 50px rgba(212,175,55,0.6);
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 0 40px var(--glow),
+        0 0 80px rgba(212,175,55,0.9);
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 100px 20px;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.6);
+      border-radius: 30px;
+      padding: 40px;
+      border: 1px solid rgba(212,175,55,0.4);
+      box-shadow:
+        0 0 30px rgba(212,175,55,0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .info p {
+      font-size: 1.15rem;
+      margin: 14px 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    input, select {
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: .9rem;
+      opacity: .6;
+    }
+
+    /* TROCA DE CORES */
+    .theme {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .theme button {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0,0,0,.7);
+    }
+
+    .gold { background: linear-gradient(135deg, #d4af37, #fff1a8); }
+    .rose { background: linear-gradient(135deg, #ff6fb1, #ffd1e8); }
+    .violet { background: linear-gradient(135deg, #7b5cff, #c4b7ff); }
+  </style>
+</head>
+<body>
+
+<div class="background"></div>
+<div class="confetti"></div>
+
+<header>
+  <h1>✨ Meus 15 Anos ✨</h1>
+  <h2>Uma noite inesquecível</h2>
+  <button class="btn" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'})">
+    Confirmar Presença
+  </button>
+</header>
+
+<section class="info">
+  <div class="card">
+    <h2>📍 Informações do Evento</h2>
+    <p><strong>Data:</strong> ———</p>
+    <p><strong>Horário:</strong> ———</p>
+    <p><strong>Local:</strong> ———</p>
+  </div>
+</section>
+
+<section id="rsvp">
+  <div class="card">
+    <h2>💫 Confirmação de Presença</h2>
+    <!-- FORMULÁRIO INTEGRADO AO GOOGLE FORMS -->
+    <form 
+      action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="enviado()"
+    >
+      <!-- NOME -->
+      <input 
+        type="text" 
+        name="entry.1111111111" 
+        placeholder="Seu nome" 
+        required
+      />
+
+      <!-- PRESENÇA -->
+      <select name="entry.2222222222" required>
+        <option value="">Você vai comparecer?</option>
+        <option value="Sim">✨ Sim, estarei presente</option>
+        <option value="Não">💔 Não poderei ir</option>
+      </select>
+
+      <button class="btn" type="submit">Confirmar</button>
+    </form>
+
+    <p id="msg"></p>
+
+    <!-- IFRAME OCULTO PRA NÃO REDIRECIONAR -->
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </div>
+</section>
+
+<div class="theme">
+  <button class="gold" onclick="setTheme('#d4af37')"></button>
+  <button class="rose" onclick="setTheme('#ff6fb1')"></button>
+  <button class="violet" onclick="setTheme('#7b5cff')"></button>
+</div>
+
+<footer>
+  Convite interativo • Preto & Dourado ✨
+</footer>
+
+<script>
+  function setTheme(color) {
+    document.documentElement.style.setProperty('--primary', color);
+    document.documentElement.style.setProperty('--glow', color + 'cc');
+  }
+
+  function enviado() {
+    document.getElementById('msg').innerHTML =
+      '✨ Presença confirmada com sucesso! Nos vemos na festa ✨';
+  }
+</script>
+
+</body>
+</html>
+
