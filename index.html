@@ -1,246 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Convite de 15 Anos ✨</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite de 15 Anos ✨</title>
 
-  <style>
-    :root {
-      --primary: #d4af37; /* dourado */
-      --secondary: #000000; /* preto */
-      --glow: rgba(212,175,55,0.8);
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    body {
-      margin: 0;
-      font-family: 'Poppins', Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<style>
+:root{
+  --primary:#d4af37;
+  --glow:rgba(212,175,55,0.8);
+}
 
-    /* FUNDO ESTILO BALÕES + CONFETE */
-    .background {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgba(212,175,55,0.25), transparent 40%),
-        radial-gradient(circle at top right, rgba(212,175,55,0.25), transparent 40%),
-        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%);
-      z-index: -2;
-    }
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
 
-    .confetti {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(var(--primary) 1.5px, transparent 1.5px),
-        radial-gradient(#ffffff 1px, transparent 1px);
-      background-size: 35px 35px, 60px 60px;
-      animation: fall 10s linear infinite;
-      opacity: 0.45;
-      z-index: -1;
-    }
+.background{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top left,rgba(212,175,55,0.25),transparent 40%),
+             radial-gradient(circle at bottom right,rgba(212,175,55,0.25),transparent 40%);
+  z-index:-2;
+}
 
-    @keyframes fall {
-      from { background-position: 0 -400px, 0 -800px; }
-      to { background-position: 0 800px, 0 1600px; }
-    }
+.confetti{
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(var(--primary) 2px,transparent 2px);
+  background-size:40px 40px;
+  animation:fall 12s linear infinite;
+  opacity:.4;
+  z-index:-1;
+}
 
-    header {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-    }
+@keyframes fall{
+  from{background-position:0 -500px}
+  to{background-position:0 1000px}
+}
 
-    h1 {
-      font-size: 3.4rem;
-      color: var(--primary);
-      text-shadow:
-        0 0 10px var(--glow),
-        0 0 30px var(--glow);
-      margin-bottom: 10px;
-    }
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 1s forwards;
+}
 
-    h2 {
-      font-weight: 300;
-      letter-spacing: 3px;
-      margin-bottom: 50px;
-      opacity: 0.9;
-    }
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0)}
+}
 
-    .btn {
-      padding: 18px 40px;
-      border-radius: 50px;
-      border: none;
-      background: linear-gradient(135deg, var(--primary), #fff1a8);
-      color: #000;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow:
-        0 0 20px var(--glow),
-        0 0 50px rgba(212,175,55,0.6);
-      transition: transform .3s, box-shadow .3s;
-    }
+header{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow:
-        0 0 40px var(--glow),
-        0 0 80px rgba(212,175,55,0.9);
-    }
+h1{
+  font-size:3.5rem;
+  color:var(--primary);
+  text-shadow:0 0 20px var(--glow);
+}
 
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 100px 20px;
-    }
+.btn{
+  padding:15px 35px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),#fff1a8);
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 20px var(--glow);
+  transition:.3s;
+}
 
-    .card {
-      background: rgba(0,0,0,0.6);
-      border-radius: 30px;
-      padding: 40px;
-      border: 1px solid rgba(212,175,55,0.4);
-      box-shadow:
-        0 0 30px rgba(212,175,55,0.25);
-      backdrop-filter: blur(6px);
-    }
+.btn:hover{transform:scale(1.1)}
 
-    .info p {
-      font-size: 1.15rem;
-      margin: 14px 0;
-    }
+section{
+  max-width:800px;
+  margin:auto;
+  padding:80px 20px;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-top: 25px;
-    }
+.card{
+  background:rgba(0,0,0,0.7);
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(212,175,55,0.3);
+  box-shadow:0 0 20px rgba(212,175,55,0.3);
+}
 
-    input, select {
-      padding: 16px;
-      border-radius: 14px;
-      border: none;
-      font-size: 1rem;
-      outline: none;
-    }
+/* CONTADOR */
+.countdown{
+  display:flex;
+  justify-content:space-between;
+  margin-top:20px;
+  gap:10px;
+  text-align:center;
+}
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: .9rem;
-      opacity: .6;
-    }
+.time-box{
+  flex:1;
+  padding:15px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+}
 
-    /* TROCA DE CORES */
-    .theme {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 12px;
-      z-index: 10;
-    }
+.time-box span{
+  display:block;
+  font-size:1.8rem;
+  color:var(--primary);
+}
 
-    .theme button {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(0,0,0,.7);
-    }
+/* PLAYER */
+.music-box{margin-top:20px;text-align:center}
 
-    .gold { background: linear-gradient(135deg, #d4af37, #fff1a8); }
-    .rose { background: linear-gradient(135deg, #ff6fb1, #ffd1e8); }
-    .violet { background: linear-gradient(135deg, #7b5cff, #c4b7ff); }
-  </style>
+audio{width:100%;margin-top:10px}
+
+.theme{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
+}
+
+.theme button{
+  width:35px;height:35px;border-radius:50%;border:none;cursor:pointer;
+}
+
+.gold{background:#d4af37}
+.rose{background:#ff6fb1}
+.violet{background:#7b5cff}
+
+footer{text-align:center;padding:30px;opacity:.6}
+</style>
 </head>
 <body>
 
 <div class="background"></div>
 <div class="confetti"></div>
 
-<header>
-  <h1>✨ Meus 15 Anos ✨</h1>
-  <h2>Uma noite inesquecível</h2>
-  <button class="btn" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'})">
-    Confirmar Presença
-  </button>
+<header class="fade">
+<h1>✨ Meus 15 Anos ✨</h1>
+<p>Uma noite inesquecível</p>
+<button class="btn" onclick="scrollToRSVP()">Confirmar Presença</button>
 </header>
 
-<section class="info">
-  <div class="card">
-    <h2>📍 Informações do Evento</h2>
-    <p><strong>Data:</strong> ———</p>
-    <p><strong>Horário:</strong> ———</p>
-    <p><strong>Local:</strong> ———</p>
-  </div>
+<section class="fade">
+<div class="card">
+<h2>⏳ Contagem Regressiva</h2>
+<div class="countdown">
+<div class="time-box"><span id="dias">0</span>Dias</div>
+<div class="time-box"><span id="horas">0</span>Horas</div>
+<div class="time-box"><span id="min">0</span>Min</div>
+<div class="time-box"><span id="seg">0</span>Seg</div>
+</div>
+</div>
 </section>
 
-<section id="rsvp">
-  <div class="card">
-    <h2>💫 Confirmação de Presença</h2>
-    <!-- FORMULÁRIO INTEGRADO AO GOOGLE FORMS -->
-    <form 
-      action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse"
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="enviado()"
-    >
-      <!-- NOME -->
-      <input 
-        type="text" 
-        name="entry.1111111111" 
-        placeholder="Seu nome" 
-        required
-      />
+<section class="fade">
+<div class="card">
+<h2>📍 Informações</h2>
+<p><strong>Data:</strong> 20/12/2026</p>
+<p><strong>Horário:</strong> 20:00</p>
+<p><strong>Local:</strong> ———</p>
 
-      <!-- PRESENÇA -->
-      <select name="entry.2222222222" required>
-        <option value="">Você vai comparecer?</option>
-        <option value="Sim">✨ Sim, estarei presente</option>
-        <option value="Não">💔 Não poderei ir</option>
-      </select>
+<div class="music-box">
+<p>🎵 Música</p>
+<audio controls>
+<source src="SUA-MUSICA.mp3" type="audio/mpeg">
+</audio>
+</div>
 
-      <button class="btn" type="submit">Confirmar</button>
-    </form>
+</div>
+</section>
 
-    <p id="msg"></p>
-
-    <!-- IFRAME OCULTO PRA NÃO REDIRECIONAR -->
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-  </div>
+<section id="rsvp" class="fade">
+<div class="card">
+<h2>💫 Confirmação</h2>
+<form action="#" onsubmit="enviado()">
+<input type="text" placeholder="Seu nome" required>
+<select required>
+<option>Vai comparecer?</option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+<button class="btn">Confirmar</button>
+</form>
+<p id="msg"></p>
+</div>
 </section>
 
 <div class="theme">
-  <button class="gold" onclick="setTheme('#d4af37')"></button>
-  <button class="rose" onclick="setTheme('#ff6fb1')"></button>
-  <button class="violet" onclick="setTheme('#7b5cff')"></button>
+<button class="gold" onclick="setTheme('#d4af37')"></button>
+<button class="rose" onclick="setTheme('#ff6fb1')"></button>
+<button class="violet" onclick="setTheme('#7b5cff')"></button>
 </div>
 
-<footer>
-  Convite interativo • Preto & Dourado ✨
-</footer>
+<footer>Convite interativo ✨</footer>
 
 <script>
-  function setTheme(color) {
-    document.documentElement.style.setProperty('--primary', color);
-    document.documentElement.style.setProperty('--glow', color + 'cc');
-  }
+function scrollToRSVP(){
+  document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});
+}
 
-  function enviado() {
-    document.getElementById('msg').innerHTML =
-      '✨ Presença confirmada com sucesso! Nos vemos na festa ✨';
-  }
+function setTheme(color){
+  document.documentElement.style.setProperty('--primary',color);
+}
+
+function enviado(){
+  document.getElementById('msg').innerHTML='✨ Confirmado!';
+}
+
+/* CONTADOR */
+const dataFesta=new Date("Dec 20, 2026 20:00:00").getTime();
+
+setInterval(()=>{
+  const agora=new Date().getTime();
+  const diff=dataFesta-agora;
+
+  const dias=Math.floor(diff/(1000*60*60*24));
+  const horas=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const min=Math.floor((diff%(1000*60*60))/(1000*60));
+  const seg=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById('dias').innerText=dias;
+  document.getElementById('horas').innerText=horas;
+  document.getElementById('min').innerText=min;
+  document.getElementById('seg').innerText=seg;
+},1000);
 </script>
 
 </body>
