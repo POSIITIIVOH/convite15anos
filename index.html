@@ -8,56 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --primary:#d4af37;
-  --glow:rgba(212,175,55,0.8);
-}
-
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
-
+:root{--primary:#d4af37;--glow:rgba(212,175,55,0.8)}
+body{margin:0;font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidden}
 .background{position:fixed;inset:0;background:radial-gradient(circle at top left,rgba(212,175,55,0.25),transparent 40%),radial-gradient(circle at bottom right,rgba(212,175,55,0.25),transparent 40%);z-index:-2}
-
 .confetti{position:fixed;inset:0;background-image:radial-gradient(var(--primary) 2px,transparent 2px);background-size:40px 40px;animation:fall 12s linear infinite;opacity:.4;z-index:-1}
-
 @keyframes fall{from{background-position:0 -500px}to{background-position:0 1000px}}
-
 header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-
 h1{font-size:3.5rem;color:var(--primary);text-shadow:0 0 20px var(--glow)}
-
 .btn{padding:15px 35px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--primary),#fff1a8);cursor:pointer;font-weight:bold;box-shadow:0 0 20px var(--glow)}
-
 section{max-width:800px;margin:auto;padding:80px 20px}
-
 .card{background:rgba(0,0,0,0.7);padding:30px;border-radius:20px;border:1px solid rgba(212,175,55,0.3)}
-
 .countdown{display:flex;gap:10px;text-align:center}
 .time-box{flex:1;padding:15px;background:rgba(255,255,255,0.05);border-radius:12px}
 .time-box span{display:block;font-size:1.8rem;color:var(--primary)}
 
-/* POPUP MUSICA */
-.popup{
+/* BOTÃO MÚSICA */
+.music-btn{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  top:20px;
+  right:20px;
+  padding:12px 18px;
+  border-radius:30px;
+  border:none;
+  background:linear-gradient(135deg,var(--primary),#fff1a8);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px var(--glow);
   z-index:999;
-}
-
-.popup-content{
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  border:1px solid var(--primary);
 }
 
 footer{text-align:center;padding:30px;opacity:.6}
@@ -68,17 +46,13 @@ footer{text-align:center;padding:30px;opacity:.6}
 <div class="background"></div>
 <div class="confetti"></div>
 
-<!-- POPUP MUSICA -->
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <h2>🎵 musica do convite</h2>
-    <audio controls autoplay>
-      <source src="SUA-MUSICA.mp3" type="audio/mpeg">
-    </audio>
-    <br><br>
-    <button class="btn" onclick="fecharPopup()">Entrar no convite</button>
-  </div>
-</div>
+<!-- PLAYER INVISÍVEL -->
+<audio id="player" loop>
+  <source src="SUA-MUSICA.mp3" type="audio/mpeg">
+</audio>
+
+<!-- BOTÃO -->
+<button class="music-btn" onclick="toggleMusica()" id="musicBtn">🎵 Ativar música</button>
 
 <header>
 <h1>✨ Meus 15 Anos ✨</h1>
@@ -126,8 +100,21 @@ footer{text-align:center;padding:30px;opacity:.6}
 <footer>Convite interativo ✨</footer>
 
 <script>
-function fecharPopup(){
-  document.getElementById('popup').style.display='none';
+let tocando=false;
+
+function toggleMusica(){
+  const audio=document.getElementById('player');
+  const btn=document.getElementById('musicBtn');
+
+  if(!tocando){
+    audio.play();
+    btn.innerText='🔇 Parar música';
+    tocando=true;
+  }else{
+    audio.pause();
+    btn.innerText='🎵 Ativar música';
+    tocando=false;
+  }
 }
 
 function scrollToRSVP(){
@@ -138,25 +125,22 @@ function enviado(){
   document.getElementById('msg').innerHTML='✨ Confirmado!';
 }
 
-/* CONTADOR CORRIGIDO */
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
 
 setInterval(()=>{
   const agora=new Date().getTime();
   const diff=dataFesta-agora;
 
-  if(diff<=0){
-    document.getElementById('dias').innerText=0;
-    document.getElementById('horas').innerText=0;
-    document.getElementById('min').innerText=0;
-    document.getElementById('seg').innerText=0;
-    return;
-  }
+  let dias,horas,min,seg;
 
-  const dias=Math.floor(diff/(1000*60*60*24));
-  const horas=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const min=Math.floor((diff%(1000*60*60))/(1000*60));
-  const seg=Math.floor((diff%(1000*60))/1000);
+  if(diff<=0){
+    dias=horas=min=seg=0;
+  }else{
+    dias=Math.floor(diff/(1000*60*60*24));
+    horas=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    min=Math.floor((diff%(1000*60*60))/(1000*60));
+    seg=Math.floor((diff%(1000*60))/1000);
+  }
 
   document.getElementById('dias').innerText=dias;
   document.getElementById('horas').innerText=horas;
