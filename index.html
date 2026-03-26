@@ -109,38 +109,57 @@ footer{text-align:center;padding:30px;opacity:.6}
 <section id="rsvp">
 <div class="card">
 <h2>💫 Confirmação</h2>
-<form 
-  action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse"
-  method="POST"
-  target="hidden_iframe"
-  onsubmit="return enviado(event)"
->
-<input type="text" name="entry.1111111111" placeholder="Seu nome" required>
-<select name="entry.2222222222" required>
-<option>Vai comparecer?</option>
-<option>Sim</option>
-<option>Não</option>
+
+<form onsubmit="return enviado(event)">
+<input type="text" id="nome" placeholder="Seu nome" required>
+
+<select id="presenca" required>
+<option value="">Vai comparecer?</option>
+<option value="Sim">Sim</option>
+<option value="Não">Não</option>
 </select>
+
+<select id="qtd">
+<option value="0">Vai levar alguém?</option>
+<option value="1">1 pessoa</option>
+<option value="2">2 pessoas</option>
+<option value="3">3 pessoas</option>
+<option value="4">4 pessoas</option>
+</select>
+
+<input type="text" id="nomes" placeholder="Nome(s) dos acompanhantes (opcional)">
+
 <button class="btn">Confirmar</button>
 </form>
 
 <p id="msg"></p>
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<button class="btn" onclick="verLista()" style="margin-top:20px;">
+📋 Ver lista de convidados
+</button>
+
 </div>
 </section>
 
 <footer>Convite interativo ✨</footer>
 
-<!-- POPUP -->
+<!-- POPUP AGRADECIMENTO -->
 <div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
   <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
     <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
-    <p style="margin-top:10px;line-height:1.6;">
-      Sua presença é muito especial.<br>
-      Conto com você nesse momento inesquecível 💖
-    </p>
+    <p>Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
     <br>
     <button class="btn" onclick="fecharObrigado()">Fechar</button>
+  </div>
+</div>
+
+<!-- POPUP LISTA -->
+<div id="popupLista" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:#111;padding:30px;border-radius:20px;max-width:500px;width:90%;max-height:80vh;overflow:auto;border:1px solid var(--primary);">
+    <h2 style="color:var(--primary);text-align:center;">📋 Lista de Convidados</h2>
+    <div id="listaConteudo" style="margin-top:20px;"></div>
+    <br>
+    <button class="btn" onclick="fecharLista()">Fechar</button>
   </div>
 </div>
 
@@ -169,7 +188,26 @@ function scrollToRSVP(){
 }
 
 function enviado(e){
-  document.getElementById('msg').innerHTML='✨ Presença salva! Redirecionando...';
+  e.preventDefault();
+
+  const nome = document.getElementById('nome').value;
+  const presenca = document.getElementById('presenca').value;
+  const qtd = document.getElementById('qtd').value;
+  const nomes = document.getElementById('nomes').value;
+
+  const novo = {nome,presenca,acompanhantes:qtd,nomesAcompanhantes:nomes};
+
+  let lista = JSON.parse(localStorage.getItem("convidados")) || [];
+  lista.push(novo);
+  localStorage.setItem("convidados", JSON.stringify(lista));
+
+  document.getElementById('msg').innerHTML='✨ Resposta salva!';
+
+  if(presenca === "Não"){
+    return false;
+  }
+
+  document.getElementById('msg').innerHTML='✨ Presença confirmada! Redirecionando...';
 
   const linkGrupo="https://chat.whatsapp.com/SEU_LINK_DO_GRUPO";
 
@@ -179,14 +217,39 @@ function enviado(e){
     window.open(linkGrupo,'_blank');
   },1000);
 
-  return true;
+  return false;
+}
+
+function verLista(){
+  const lista = JSON.parse(localStorage.getItem("convidados")) || [];
+  const div = document.getElementById('listaConteudo');
+
+  if(lista.length === 0){
+    div.innerHTML = "Nenhuma confirmação ainda 😢";
+  }else{
+    div.innerHTML = "";
+    lista.forEach((pessoa,i)=>{
+      div.innerHTML += `
+      <div style="margin-bottom:15px;padding:10px;border-bottom:1px solid #333;">
+      <strong>${i+1}. ${pessoa.nome}</strong><br>
+      Presença: ${pessoa.presenca}<br>
+      Acompanhantes: ${pessoa.acompanhantes}<br>
+      ${pessoa.nomesAcompanhantes ? "Nomes: "+pessoa.nomesAcompanhantes : ""}
+      </div>`;
+    });
+  }
+
+  document.getElementById('popupLista').style.display='flex';
+}
+
+function fecharLista(){
+  document.getElementById('popupLista').style.display='none';
 }
 
 function fecharObrigado(){
   document.getElementById('popupObrigado').style.display='none';
 }
 
-// DETECÇÃO PROFISSIONAL
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden && podeMostrar){
     saiuDaPagina=true;
@@ -199,7 +262,6 @@ document.addEventListener("visibilitychange",()=>{
   }
 });
 
-// CONTADOR
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
 
 setInterval(()=>{
