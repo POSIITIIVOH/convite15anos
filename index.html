@@ -93,7 +93,7 @@ footer{text-align:center;padding:30px;opacity:.6}
 <section id="rsvp">
 <div class="card">
 <h2>💫 Confirmação</h2>
-<form onsubmit="enviado()">
+<form onsubmit="return enviado(event)">
 <input type="text" placeholder="Seu nome" required>
 <select required>
 <option>Vai comparecer?</option>
@@ -130,8 +130,17 @@ function scrollToRSVP(){
   document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});
 }
 
-function enviado(){
-  document.getElementById('msg').innerHTML='✨ Confirmado!';
+function enviado(e){
+  e.preventDefault();
+  document.getElementById('msg').innerHTML='✨ Confirmado! Redirecionando...';
+
+  // LINK DO GRUPO WHATSAPP
+  const linkGrupo = "https://chat.whatsapp.com/E5O5OknXFZxIjOMzGKGnCH";
+
+  // abre em nova aba
+  window.open(linkGrupo, '_blank');
+
+  return false;
 }
 
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
