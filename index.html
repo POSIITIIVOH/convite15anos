@@ -13,16 +13,33 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#000;color:#fff;overfl
 .background{position:fixed;inset:0;background:radial-gradient(circle at top left,rgba(212,175,55,0.25),transparent 40%),radial-gradient(circle at bottom right,rgba(212,175,55,0.25),transparent 40%);z-index:-2}
 .confetti{position:fixed;inset:0;background-image:radial-gradient(var(--primary) 2px,transparent 2px);background-size:40px 40px;animation:fall 12s linear infinite;opacity:.4;z-index:-1}
 @keyframes fall{from{background-position:0 -500px}to{background-position:0 1000px}}
+
 header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 h1{font-size:3.5rem;color:var(--primary);text-shadow:0 0 20px var(--glow)}
-.btn{padding:15px 35px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--primary),#fff1a8);cursor:pointer;font-weight:bold;box-shadow:0 0 20px var(--glow)}
+
+.btn{
+  padding:15px 35px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),#fff1a8);
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 20px var(--glow);
+}
+
 section{max-width:800px;margin:auto;padding:80px 20px}
-.card{background:rgba(0,0,0,0.7);padding:30px;border-radius:20px;border:1px solid rgba(212,175,55,0.3)}
+
+.card{
+  background:rgba(0,0,0,0.7);
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(212,175,55,0.3)
+}
+
 .countdown{display:flex;gap:10px;text-align:center}
 .time-box{flex:1;padding:15px;background:rgba(255,255,255,0.05);border-radius:12px}
 .time-box span{display:block;font-size:1.8rem;color:var(--primary)}
 
-/* BOTÃO MÚSICA */
 .music-btn{
   position:fixed;
   top:20px;
@@ -38,8 +55,6 @@ section{max-width:800px;margin:auto;padding:80px 20px}
   z-index:999;
 }
 
-footer{text-align:center;padding:30px;opacity:.6}
-
 .nome{
   margin-top:10px;
   font-size:2rem;
@@ -47,6 +62,8 @@ footer{text-align:center;padding:30px;opacity:.6}
   letter-spacing:3px;
   text-shadow:0 0 15px rgba(255,111,177,0.7);
 }
+
+footer{text-align:center;padding:30px;opacity:.6}
 </style>
 </head>
 <body>
@@ -54,12 +71,10 @@ footer{text-align:center;padding:30px;opacity:.6}
 <div class="background"></div>
 <div class="confetti"></div>
 
-<!-- PLAYER INVISÍVEL -->
 <audio id="player" loop>
   <source src="SUA-MUSICA.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BOTÃO -->
 <button class="music-btn" onclick="toggleMusica()" id="musicBtn">🎵 Ativar música</button>
 
 <header>
@@ -86,7 +101,7 @@ footer{text-align:center;padding:30px;opacity:.6}
 <h2>📍 Informações</h2>
 <p><strong>Data:</strong> 24/05/2026</p>
 <p><strong>Horário:</strong> 19:30</p>
-<p><strong>Cidade:</strong> Santa Helena De Goias</p>
+<p><strong>Cidade:</strong> Santa Helena De Goiás</p>
 <p><strong>Info:</strong> Mais detalhes após a confirmação ✨</p>
 </div>
 </section>
@@ -108,6 +123,7 @@ footer{text-align:center;padding:30px;opacity:.6}
 </select>
 <button class="btn">Confirmar</button>
 </form>
+
 <p id="msg"></p>
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 </div>
@@ -115,8 +131,23 @@ footer{text-align:center;padding:30px;opacity:.6}
 
 <footer>Convite interativo ✨</footer>
 
+<!-- POPUP -->
+<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
+    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
+    <p style="margin-top:10px;line-height:1.6;">
+      Sua presença é muito especial.<br>
+      Conto com você nesse momento inesquecível 💖
+    </p>
+    <br>
+    <button class="btn" onclick="fecharObrigado()">Fechar</button>
+  </div>
+</div>
+
 <script>
 let tocando=false;
+let saiuDaPagina=false;
+let podeMostrar=false;
 
 function toggleMusica(){
   const audio=document.getElementById('player');
@@ -140,7 +171,9 @@ function scrollToRSVP(){
 function enviado(e){
   document.getElementById('msg').innerHTML='✨ Presença salva! Redirecionando...';
 
-  const linkGrupo = "https://chat.whatsapp.com/SEU_LINK_DO_GRUPO";
+  const linkGrupo="https://chat.whatsapp.com/SEU_LINK_DO_GRUPO";
+
+  podeMostrar=true;
 
   setTimeout(()=>{
     window.open(linkGrupo,'_blank');
@@ -149,6 +182,24 @@ function enviado(e){
   return true;
 }
 
+function fecharObrigado(){
+  document.getElementById('popupObrigado').style.display='none';
+}
+
+// DETECÇÃO PROFISSIONAL
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden && podeMostrar){
+    saiuDaPagina=true;
+  }
+
+  if(!document.hidden && saiuDaPagina){
+    document.getElementById('popupObrigado').style.display='flex';
+    saiuDaPagina=false;
+    podeMostrar=false;
+  }
+});
+
+// CONTADOR
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
 
 setInterval(()=>{
@@ -171,33 +222,6 @@ setInterval(()=>{
   document.getElementById('min').innerText=min;
   document.getElementById('seg').innerText=seg;
 },1000);
-</script>
-
-
-<!-- POPUP AGRADECIMENTO -->
-<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
-  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
-    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
-    <p style="margin-top:10px;line-height:1.6;">Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
-    <br>
-    <button class="btn" onclick="fecharObrigado()">Fechar</button>
-  </div>
-</div>
-
-<script>
-let voltouDoWhats=false;
-
-// detecta quando volta pra aba
-window.addEventListener('focus',()=>{
-  if(voltouDoWhats){
-    document.getElementById('popupObrigado').style.display='flex';
-    voltouDoWhats=false;
-  }
-});
-
-function fecharObrigado(){
-  document.getElementById('popupObrigado').style.display='none';
-}
 </script>
 
 </body>
