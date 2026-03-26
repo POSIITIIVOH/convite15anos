@@ -78,7 +78,7 @@ footer{text-align:center;padding:30px;opacity:.6}
 <button class="music-btn" onclick="toggleMusica()" id="musicBtn">🎵 Ativar música</button>
 
 <header>
-<h1>✨ Meus 15 Anos ✨</h1>
+<h1 id="titulo">✨ Meus 15 Anos ✨</h1>
 <h2 class="nome">🎀 RAYANE 🎀</h2>
 <p>Uma noite inesquecível</p>
 <button class="btn" onclick="scrollToRSVP()">Confirmar Presença</button>
@@ -134,24 +134,10 @@ footer{text-align:center;padding:30px;opacity:.6}
 
 <p id="msg"></p>
 
-<button class="btn" onclick="verLista()" style="margin-top:20px;">
-📋 Ver lista de convidados
-</button>
-
 </div>
 </section>
 
 <footer>Convite interativo ✨</footer>
-
-<!-- POPUP AGRADECIMENTO -->
-<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
-  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
-    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
-    <p>Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
-    <br>
-    <button class="btn" onclick="fecharObrigado()">Fechar</button>
-  </div>
-</div>
 
 <!-- POPUP LISTA -->
 <div id="popupLista" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;">
@@ -160,6 +146,16 @@ footer{text-align:center;padding:30px;opacity:.6}
     <div id="listaConteudo" style="margin-top:20px;"></div>
     <br>
     <button class="btn" onclick="fecharLista()">Fechar</button>
+  </div>
+</div>
+
+<!-- POPUP AGRADECIMENTO -->
+<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
+    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
+    <p>Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
+    <br>
+    <button class="btn" onclick="fecharObrigado()">Fechar</button>
   </div>
 </div>
 
@@ -220,6 +216,7 @@ function enviado(e){
   return false;
 }
 
+/* LISTA */
 function verLista(){
   const lista = JSON.parse(localStorage.getItem("convidados")) || [];
   const div = document.getElementById('listaConteudo');
@@ -250,6 +247,26 @@ function fecharObrigado(){
   document.getElementById('popupObrigado').style.display='none';
 }
 
+/* CLIQUE SECRETO */
+let cliques = 0;
+let tempoClique;
+
+document.getElementById("titulo").addEventListener("click", () => {
+  cliques++;
+
+  clearTimeout(tempoClique);
+
+  tempoClique = setTimeout(() => {
+    cliques = 0;
+  }, 2000);
+
+  if(cliques === 5){
+    verLista();
+    cliques = 0;
+  }
+});
+
+/* DETECÇÃO VOLTA */
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden && podeMostrar){
     saiuDaPagina=true;
@@ -262,6 +279,7 @@ document.addEventListener("visibilitychange",()=>{
   }
 });
 
+/* CONTADOR */
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
 
 setInterval(()=>{
