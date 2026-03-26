@@ -86,16 +86,21 @@ footer{text-align:center;padding:30px;opacity:.6}
 <h2>📍 Informações</h2>
 <p><strong>Data:</strong> 24/05/2026</p>
 <p><strong>Horário:</strong> 19:30</p>
-<p><strong>Local:</strong> ———</p>
+<p><strong>Local:</strong> Mais detalhes após a confirmação ✨</p>
 </div>
 </section>
 
 <section id="rsvp">
 <div class="card">
 <h2>💫 Confirmação</h2>
-<form onsubmit="return enviado(event)">
-<input type="text" placeholder="Seu nome" required>
-<select required>
+<form 
+  action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse"
+  method="POST"
+  target="hidden_iframe"
+  onsubmit="return enviado(event)"
+>
+<input type="text" name="entry.1111111111" placeholder="Seu nome" required>
+<select name="entry.2222222222" required>
 <option>Vai comparecer?</option>
 <option>Sim</option>
 <option>Não</option>
@@ -103,10 +108,11 @@ footer{text-align:center;padding:30px;opacity:.6}
 <button class="btn">Confirmar</button>
 </form>
 <p id="msg"></p>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 </div>
 </section>
 
-<footer>© 2026 Rayane e Paulo. Todos os direitos reservados. </footer>
+<footer>Convite interativo ✨</footer>
 
 <script>
 let tocando=false;
@@ -131,16 +137,15 @@ function scrollToRSVP(){
 }
 
 function enviado(e){
-  e.preventDefault();
-  document.getElementById('msg').innerHTML='✨ Confirmado! Redirecionando...';
+  document.getElementById('msg').innerHTML='✨ Presença salva! Redirecionando...';
 
-  // LINK DO GRUPO WHATSAPP
-  const linkGrupo = "https://chat.whatsapp.com/E5O5OknXFZxIjOMzGKGnCH";
+  const linkGrupo = "https://chat.whatsapp.com/SEU_LINK_DO_GRUPO";
 
-  // abre em nova aba
-  window.open(linkGrupo, '_blank');
+  setTimeout(()=>{
+    window.open(linkGrupo,'_blank');
+  },1000);
 
-  return false;
+  return true;
 }
 
 const dataFesta=new Date("2026-05-24T19:30:00").getTime();
@@ -165,6 +170,33 @@ setInterval(()=>{
   document.getElementById('min').innerText=min;
   document.getElementById('seg').innerText=seg;
 },1000);
+</script>
+
+
+<!-- POPUP AGRADECIMENTO -->
+<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
+    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
+    <p style="margin-top:10px;line-height:1.6;">Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
+    <br>
+    <button class="btn" onclick="fecharObrigado()">Fechar</button>
+  </div>
+</div>
+
+<script>
+let voltouDoWhats=false;
+
+// detecta quando volta pra aba
+window.addEventListener('focus',()=>{
+  if(voltouDoWhats){
+    document.getElementById('popupObrigado').style.display='flex';
+    voltouDoWhats=false;
+  }
+});
+
+function fecharObrigado(){
+  document.getElementById('popupObrigado').style.display='none';
+}
 </script>
 
 </body>
