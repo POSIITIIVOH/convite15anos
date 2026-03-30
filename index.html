@@ -8,37 +8,86 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--primary:#d4af37;--glow:rgba(212,175,55,0.8)}
-body{margin:0;font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidden}
-.background{position:fixed;inset:0;background:radial-gradient(circle at top left,rgba(212,175,55,0.25),transparent 40%),radial-gradient(circle at bottom right,rgba(212,175,55,0.25),transparent 40%);z-index:-2}
-.confetti{position:fixed;inset:0;background-image:radial-gradient(var(--primary) 2px,transparent 2px);background-size:40px 40px;animation:fall 12s linear infinite;opacity:.4;z-index:-1}
-@keyframes fall{from{background-position:0 -500px}to{background-position:0 1000px}}
+:root{
+  --primary:#d4af37;
+  --glow:rgba(212,175,55,0.8);
+}
 
-header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-h1{font-size:3.5rem;color:var(--primary);text-shadow:0 0 20px var(--glow)}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+.background{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top left,rgba(212,175,55,0.25),transparent 40%),
+    radial-gradient(circle at bottom right,rgba(212,175,55,0.25),transparent 40%);
+  z-index:-2;
+}
+
+.confetti{
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(var(--primary) 2px,transparent 2px);
+  background-size:40px 40px;
+  animation:fall 12s linear infinite;
+  opacity:.4;
+  z-index:-1;
+}
+
+@keyframes fall{
+  from{background-position:0 -500px}
+  to{background-position:0 1000px}
+}
+
+header{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+h1{
+  font-size:3.5rem;
+  color:var(--primary);
+  text-shadow:0 0 20px var(--glow);
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+.nome{
+  margin-top:0;
+  font-size:2rem;
+  color:#ff6fb1;
+  letter-spacing:3px;
+  text-shadow:0 0 15px rgba(255,111,177,0.7);
+}
 
 .btn{
   padding:15px 35px;
   border:none;
   border-radius:50px;
   background:linear-gradient(135deg,var(--primary),#fff1a8);
+  color:#000;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
   box-shadow:0 0 20px var(--glow);
+  transition:.2s;
 }
 
-section{max-width:800px;margin:auto;padding:80px 20px}
-
-.card{
-  background:rgba(0,0,0,0.7);
-  padding:30px;
-  border-radius:20px;
-  border:1px solid rgba(212,175,55,0.3)
+.btn:hover{
+  transform:scale(1.04);
 }
-
-.countdown{display:flex;gap:10px;text-align:center}
-.time-box{flex:1;padding:15px;background:rgba(255,255,255,0.05);border-radius:12px}
-.time-box span{display:block;font-size:1.8rem;color:var(--primary)}
 
 .music-btn{
   position:fixed;
@@ -55,15 +104,97 @@ section{max-width:800px;margin:auto;padding:80px 20px}
   z-index:999;
 }
 
-.nome{
-  margin-top:10px;
-  font-size:2rem;
-  color:#ff6fb1;
-  letter-spacing:3px;
-  text-shadow:0 0 15px rgba(255,111,177,0.7);
+section{
+  max-width:800px;
+  margin:auto;
+  padding:40px 20px;
 }
 
-footer{text-align:center;padding:30px;opacity:.6}
+.card{
+  background:rgba(0,0,0,0.72);
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(212,175,55,0.3);
+  backdrop-filter:blur(6px);
+}
+
+.countdown{
+  display:flex;
+  gap:10px;
+  text-align:center;
+  flex-wrap:wrap;
+}
+
+.time-box{
+  flex:1;
+  min-width:100px;
+  padding:15px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+}
+
+.time-box span{
+  display:block;
+  font-size:1.8rem;
+  color:var(--primary);
+}
+
+input,select{
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid rgba(212,175,55,0.3);
+  background:#111;
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+}
+
+#msg{
+  margin-top:18px;
+  text-align:center;
+  color:var(--primary);
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  opacity:.6;
+}
+
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:20px;
+}
+
+.popup-box{
+  background:#111;
+  border:1px solid var(--primary);
+  border-radius:20px;
+  padding:30px;
+  width:100%;
+  max-width:520px;
+  max-height:80vh;
+  overflow:auto;
+}
+
+.lista-item{
+  margin-bottom:15px;
+  padding:12px;
+  border-bottom:1px solid #333;
+}
+
+@media(max-width:600px){
+  h1{font-size:2.5rem}
+  .nome{font-size:1.5rem}
+}
 </style>
 </head>
 <body>
@@ -78,104 +209,105 @@ footer{text-align:center;padding:30px;opacity:.6}
 <button class="music-btn" onclick="toggleMusica()" id="musicBtn">🎵 Ativar música</button>
 
 <header>
-<h1 id="titulo">✨ Meus 15 Anos ✨</h1>
-<h2 class="nome">🎀 RAYANE 🎀</h2>
-<p>Uma noite inesquecível</p>
-<button class="btn" onclick="scrollToRSVP()">Confirmar Presença</button>
+  <h1 id="titulo">✨ Meus 15 Anos ✨</h1>
+  <h2 class="nome">🎀 RAYANE 🎀</h2>
+  <p>Uma noite inesquecível</p>
+  <button class="btn" onclick="scrollToRSVP()">Confirmar Presença</button>
 </header>
 
 <section>
-<div class="card">
-<h2>⏳ Contagem Regressiva</h2>
-<div class="countdown">
-<div class="time-box"><span id="dias">0</span>Dias</div>
-<div class="time-box"><span id="horas">0</span>Horas</div>
-<div class="time-box"><span id="min">0</span>Min</div>
-<div class="time-box"><span id="seg">0</span>Seg</div>
-</div>
-</div>
+  <div class="card">
+    <h2>⏳ Contagem Regressiva</h2>
+
+    <div class="countdown">
+      <div class="time-box"><span id="dias">0</span>Dias</div>
+      <div class="time-box"><span id="horas">0</span>Horas</div>
+      <div class="time-box"><span id="min">0</span>Min</div>
+      <div class="time-box"><span id="seg">0</span>Seg</div>
+    </div>
+  </div>
 </section>
 
 <section>
-<div class="card">
-<h2>📍 Informações</h2>
-<p><strong>Data:</strong> 24/05/2026</p>
-<p><strong>Horário:</strong> 19:30</p>
-<p><strong>Cidade:</strong> Santa Helena De Goiás</p>
-<p><strong>Info:</strong> Mais detalhes após a confirmação ✨</p>
-</div>
+  <div class="card">
+    <h2>📍 Informações</h2>
+    <p><strong>Data:</strong> 24/05/2026</p>
+    <p><strong>Horário:</strong> 19:30</p>
+    <p><strong>Cidade:</strong> Santa Helena de Goiás</p>
+    <p><strong>Info:</strong> Mais detalhes após a confirmação ✨</p>
+  </div>
 </section>
 
 <section id="rsvp">
-<div class="card">
-<h2>💫 Confirmação</h2>
+  <div class="card">
+    <h2>💫 Confirmação</h2>
 
-<form onsubmit="return enviado(event)">
-<input type="text" id="nome" placeholder="Seu nome" required>
+    <form onsubmit="return enviado(event)">
+      <input type="text" id="nome" placeholder="Seu nome" required>
 
-<select id="presenca" required>
-<option value="">Vai comparecer?</option>
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
+      <select id="presenca" required>
+        <option value="">Vai comparecer?</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
 
-<select id="qtd">
-<option value="0">Vai levar alguém?</option>
-<option value="1">1 pessoa</option>
-<option value="2">2 pessoas</option>
-<option value="3">3 pessoas</option>
-<option value="4">4 pessoas</option>
-</select>
+      <select id="qtd">
+        <option value="0">Vai levar alguém?</option>
+        <option value="1">1 pessoa</option>
+        <option value="2">2 pessoas</option>
+        <option value="3">3 pessoas</option>
+        <option value="4">4 pessoas</option>
+      </select>
 
-<input type="text" id="nomes" placeholder="Nome(s) dos acompanhantes (opcional)">
+      <input type="text" id="nomes" placeholder="Nome(s) dos acompanhantes (opcional)">
 
-<button class="btn">Confirmar</button>
-</form>
+      <button class="btn" style="margin-top:18px;width:100%;">Confirmar</button>
+    </form>
 
-<p id="msg"></p>
-
-</div>
+    <p id="msg"></p>
+  </div>
 </section>
 
 <footer>Convite interativo ✨</footer>
 
-<!-- POPUP LISTA -->
-<div id="popupLista" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;">
-  <div style="background:#111;padding:30px;border-radius:20px;max-width:500px;width:90%;max-height:80vh;overflow:auto;border:1px solid var(--primary);">
+<div id="popupLista" class="popup">
+  <div class="popup-box">
     <h2 style="color:var(--primary);text-align:center;">📋 Lista de Convidados</h2>
-    <div id="listaConteudo" style="margin-top:20px;"></div>
+    <div id="listaConteudo" style="margin-top:20px"></div>
     <br>
-    <button class="btn" onclick="fecharLista()">Fechar</button>
+    <button class="btn" onclick="fecharLista()" style="width:100%">Fechar</button>
   </div>
 </div>
 
-<!-- POPUP AGRADECIMENTO -->
-<div id="popupObrigado" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;">
-  <div style="background:#111;padding:30px;border-radius:20px;text-align:center;border:1px solid var(--primary);max-width:300px;">
-    <h2 style="color:var(--primary);">✨ Obrigado ✨</h2>
+<div id="popupObrigado" class="popup">
+  <div class="popup-box" style="max-width:350px;text-align:center;">
+    <h2 style="color:var(--primary)">✨ Obrigado ✨</h2>
     <p>Sua presença é muito especial.<br>Conto com você nesse momento inesquecível 💖</p>
     <br>
-    <button class="btn" onclick="fecharObrigado()">Fechar</button>
+    <button class="btn" onclick="fecharObrigado()" style="width:100%">Fechar</button>
   </div>
 </div>
 
 <script>
-let tocando=false;
-let saiuDaPagina=false;
-let podeMostrar=false;
+let tocando = false;
+let saiuDaPagina = false;
+let podeMostrar = false;
+
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbxdNaTC6G0stpZuaiT6Z-9OqpFxh0RlLrIIoCZMh1-c_Gnmj70-rMDKlZHwlbhVyJUYLA/exec";
+const LINK_GRUPO = "https://chat.whatsapp.com/E5O5OknXFZxIjOMzGKGnCH";
 
 function toggleMusica(){
-  const audio=document.getElementById('player');
-  const btn=document.getElementById('musicBtn');
+  const audio = document.getElementById('player');
+  const btn = document.getElementById('musicBtn');
 
   if(!tocando){
     audio.play();
-    btn.innerText='🔇 Parar música';
-    tocando=true;
+    btn.innerText = '🔇 Parar música';
+    tocando = true;
   }else{
     audio.pause();
-    btn.innerText='🎵 Ativar música';
-    tocando=false;
+    btn.innerText = '🎵 Ativar música';
+    tocando = false;
   }
 }
 
@@ -183,83 +315,99 @@ function scrollToRSVP(){
   document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});
 }
 
-function enviado(e){
+async function enviado(e){
   e.preventDefault();
 
-  const nome = document.getElementById('nome').value;
+  const nome = document.getElementById('nome').value.trim();
   const presenca = document.getElementById('presenca').value;
   const qtd = document.getElementById('qtd').value;
-  const nomes = document.getElementById('nomes').value;
+  const nomes = document.getElementById('nomes').value.trim();
+  const msg = document.getElementById('msg');
 
-  const novo = {nome,presenca,acompanhantes:qtd,nomesAcompanhantes:nomes};
+  const novo = {
+    nome,
+    presenca,
+    acompanhantes:qtd,
+    nomesAcompanhantes:nomes
+  };
 
-  fetch("https://script.google.com/macros/s/AKfycbxdNaTC6G0stpZuaiT6Z-9OqpFxh0RlLrIIoCZMh1-c_Gnmj70-rMDKlZHwlbhVyJUYLA/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    nome: nome,
-    presenca: presenca,
-    qtd: qtd,
-    nomes: nomes
-  })
-});
-  document.getElementById('msg').innerHTML='✨ Resposta salva!';
+  let lista = JSON.parse(localStorage.getItem('convidados')) || [];
+  lista.push(novo);
+  localStorage.setItem('convidados', JSON.stringify(lista));
 
-  if(presenca === "Não"){
-    return false;
+  msg.innerHTML = '⏳ Salvando...';
+
+  try{
+    await fetch(URL_SCRIPT, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({
+        nome:nome,
+        presenca:presenca,
+        qtd:qtd,
+        nomes:nomes
+      })
+    });
+
+    if(presenca === 'Não'){
+      msg.innerHTML = '✨ Resposta salva! Obrigado por avisar.';
+      return false;
+    }
+
+    msg.innerHTML = '✨ Presença confirmada! Abrindo grupo...';
+
+    podeMostrar = true;
+
+    setTimeout(() => {
+      window.open(LINK_GRUPO, '_blank');
+    }, 1000);
+
+  }catch(erro){
+    console.error(erro);
+    msg.innerHTML = '❌ Erro ao salvar. Confira o Apps Script.';
   }
-
-  document.getElementById('msg').innerHTML='✨ Presença confirmada! Redirecionando...';
-
-  const linkGrupo="https://chat.whatsapp.com/E5O5OknXFZxIjOMzGKGnCH";
-
-  podeMostrar=true;
-
-  setTimeout(()=>{
-    window.open(linkGrupo,'_blank');
-  },1000);
 
   return false;
 }
 
-/* LISTA */
 function verLista(){
-  const lista = JSON.parse(localStorage.getItem("convidados")) || [];
+  const lista = JSON.parse(localStorage.getItem('convidados')) || [];
   const div = document.getElementById('listaConteudo');
 
   if(lista.length === 0){
-    div.innerHTML = "Nenhuma confirmação ainda 😢";
+    div.innerHTML = 'Nenhuma confirmação ainda 😢';
   }else{
-    div.innerHTML = "";
-    lista.forEach((pessoa,i)=>{
+    div.innerHTML = '';
+
+    lista.forEach((pessoa, i) => {
       div.innerHTML += `
-      <div style="margin-bottom:15px;padding:10px;border-bottom:1px solid #333;">
-      <strong>${i+1}. ${pessoa.nome}</strong><br>
-      Presença: ${pessoa.presenca}<br>
-      Acompanhantes: ${pessoa.acompanhantes}<br>
-      ${pessoa.nomesAcompanhantes ? "Nomes: "+pessoa.nomesAcompanhantes : ""}
-      </div>`;
+        <div class="lista-item">
+          <strong>${i + 1}. ${pessoa.nome}</strong><br>
+          Presença: ${pessoa.presenca}<br>
+          Acompanhantes: ${pessoa.acompanhantes}<br>
+          ${pessoa.nomesAcompanhantes ? 'Nomes: ' + pessoa.nomesAcompanhantes : ''}
+        </div>
+      `;
     });
   }
 
-  document.getElementById('popupLista').style.display='flex';
+  document.getElementById('popupLista').style.display = 'flex';
 }
 
 function fecharLista(){
-  document.getElementById('popupLista').style.display='none';
+  document.getElementById('popupLista').style.display = 'none';
 }
 
 function fecharObrigado(){
-  document.getElementById('popupObrigado').style.display='none';
+  document.getElementById('popupObrigado').style.display = 'none';
 }
 
-/* CLIQUE SECRETO */
 let cliques = 0;
 let tempoClique;
 
-document.getElementById("titulo").addEventListener("click", () => {
+document.getElementById('titulo').addEventListener('click', () => {
   cliques++;
 
   clearTimeout(tempoClique);
@@ -274,42 +422,41 @@ document.getElementById("titulo").addEventListener("click", () => {
   }
 });
 
-/* DETECÇÃO VOLTA */
-document.addEventListener("visibilitychange",()=>{
+document.addEventListener('visibilitychange', () => {
   if(document.hidden && podeMostrar){
-    saiuDaPagina=true;
+    saiuDaPagina = true;
   }
 
   if(!document.hidden && saiuDaPagina){
-    document.getElementById('popupObrigado').style.display='flex';
-    saiuDaPagina=false;
-    podeMostrar=false;
+    document.getElementById('popupObrigado').style.display = 'flex';
+    saiuDaPagina = false;
+    podeMostrar = false;
   }
 });
 
-/* CONTADOR */
-const dataFesta=new Date("2026-05-24T19:30:00").getTime();
+const dataFesta = new Date('2026-05-24T19:30:00').getTime();
 
-setInterval(()=>{
-  const agora=new Date().getTime();
-  const diff=dataFesta-agora;
+setInterval(() => {
+  const agora = new Date().getTime();
+  const diff = dataFesta - agora;
 
-  let dias,horas,min,seg;
+  let dias = 0;
+  let horas = 0;
+  let min = 0;
+  let seg = 0;
 
-  if(diff<=0){
-    dias=horas=min=seg=0;
-  }else{
-    dias=Math.floor(diff/(1000*60*60*24));
-    horas=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    min=Math.floor((diff%(1000*60*60))/(1000*60));
-    seg=Math.floor((diff%(1000*60))/1000);
+  if(diff > 0){
+    dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    seg = Math.floor((diff % (1000 * 60)) / 1000);
   }
 
-  document.getElementById('dias').innerText=dias;
-  document.getElementById('horas').innerText=horas;
-  document.getElementById('min').innerText=min;
-  document.getElementById('seg').innerText=seg;
-},1000);
+  document.getElementById('dias').innerText = dias;
+  document.getElementById('horas').innerText = horas;
+  document.getElementById('min').innerText = min;
+  document.getElementById('seg').innerText = seg;
+}, 1000);
 </script>
 
 </body>
