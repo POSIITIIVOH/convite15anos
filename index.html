@@ -193,10 +193,18 @@ function enviado(e){
 
   const novo = {nome,presenca,acompanhantes:qtd,nomesAcompanhantes:nomes};
 
-  let lista = JSON.parse(localStorage.getItem("convidados")) || [];
-  lista.push(novo);
-  localStorage.setItem("convidados", JSON.stringify(lista));
-
+  fetch("https://script.google.com/macros/s/AKfycbxdNaTC6G0stpZuaiT6Z-9OqpFxh0RlLrIIoCZMh1-c_Gnmj70-rMDKlZHwlbhVyJUYLA/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    nome: nome,
+    presenca: presenca,
+    qtd: qtd,
+    nomes: nomes
+  })
+});
   document.getElementById('msg').innerHTML='✨ Resposta salva!';
 
   if(presenca === "Não"){
@@ -205,7 +213,7 @@ function enviado(e){
 
   document.getElementById('msg').innerHTML='✨ Presença confirmada! Redirecionando...';
 
-  const linkGrupo="https://chat.whatsapp.com/SEU_LINK_DO_GRUPO";
+  const linkGrupo="https://chat.whatsapp.com/E5O5OknXFZxIjOMzGKGnCH";
 
   podeMostrar=true;
 
