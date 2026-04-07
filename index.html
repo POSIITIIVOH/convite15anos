@@ -385,19 +385,28 @@ function confirmarPresenca(){
     return;
   }
 
-  let mensagem = `Olá! Meu nome é ${nome}. Confirmo a minha presença nessa incrivel festa de 15 anos da Rayane!`;
+  let mensagem = `Olá! Meu nome é ${nome}.
 
-  if(qtd !== '0'){
-    mensagem += `\nVou levar ${qtd} acompanhante(s).`;
+Confirmo a minha presença nessa incrível festa de 15 anos da Rayane!`;
 
-    if(nomes){
-      mensagem += `\nNome(s): ${nomes}`;
-    }
-  }else{
-    mensagem += `\nNão levarei acompanhantes.`;
+if(qtd !== '0'){
+  mensagem += `
+
+Vou levar ${qtd} acompanhante(s).`;
+
+  if(nomes){
+    mensagem += `
+Nome(s): ${nomes}`;
   }
+}else{
+  mensagem += `
 
-  mensagem += `\n\nPode me enviar o restante das informações?`;
+Não levarei acompanhantes.`;
+}
+
+mensagem += `
+
+Pode me enviar o restante das informações?`;
 
   msg.innerHTML = '✨ Presença confirmada! Abrindo WhatsApp...';
 
